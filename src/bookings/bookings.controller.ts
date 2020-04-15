@@ -7,13 +7,12 @@ export class BookingsController {
   constructor(private bookingsService: BookingsService) {}
 
   @Get()
-  index(): any {
-    // return this.bookingsService.insertBooking();
+  async index() {
     return this.bookingsService.getAll();
   }
 
   @Post()
-  async test(@Body() post: Booking) {
-    return await this.bookingsService.secret(post);
+  async postBooking(@Body() booking: Booking) {
+    return await this.bookingsService.insertBooking(booking)
   }
 }

@@ -9,8 +9,7 @@ export class BookingsService {
     @InjectModel('Booking') private readonly bookingModel: Model<Booking>,
   ) {}
 
-  async insertBooking() {
-    const newBooking = { name: 'Meow', description: 'LOL' };
+  async insertBooking(newBooking) {
     try{
       const bookingData = await this.bookingModel.create(newBooking);
       return bookingData;
@@ -27,13 +26,5 @@ export class BookingsService {
     catch (e){
       return e.message
     }
-  }
-
-  async secret(post) {
-    const secret = {
-      code: post.passcode,
-      secret: 'SECRET STUFF',
-    };
-    return secret;
   }
 }

@@ -8,7 +8,6 @@ import { BookingsController } from './bookings.controller';
 import { BookingsService } from './bookings.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { BookingsSchema } from './bookings.model';
-import { AdminTestMiddleware } from './admin-test.middleware';
 
 @Module({
   imports: [
@@ -17,13 +16,5 @@ import { AdminTestMiddleware } from './admin-test.middleware';
   controllers: [BookingsController],
   providers: [BookingsService],
 })
-export class BookingsModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AdminTestMiddleware)
-      .forRoutes(
-        { path: 'bookings', method: RequestMethod.POST },
-        { path: 'bookings', method: RequestMethod.PATCH },
-      );
-  }
+export class BookingsModule {
 }
