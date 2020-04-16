@@ -16,7 +16,10 @@ export class BookingsService {
     } catch(e) {
       return e.message
     }
-    
+  }
+
+  async getOne(id) {
+    return this.bookingModel.findById(id);
   }
 
   async getAll() {
