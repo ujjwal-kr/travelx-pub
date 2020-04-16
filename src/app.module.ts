@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { BookingsModule } from './bookings/bookings.module';
 import { RegistryModule } from './registry/registry.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { RegistryModule } from './registry/registry.module';
       useNewUrlParser: true,
     }),
     RegistryModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -16,5 +16,4 @@ import { BookingsSchema } from './bookings.model';
   controllers: [BookingsController],
   providers: [BookingsService],
 })
-export class BookingsModule {
-}
+export class BookingsModule {}

@@ -13,7 +13,7 @@ export class BookingsController {
 
   @Post()
   async postBooking(@Body() booking: Booking) {
-    return await this.bookingsService.insertBooking(booking)
+    return await this.bookingsService.insertBooking(booking);
   }
 
   @Get(':id')

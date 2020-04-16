@@ -4,6 +4,6 @@ import { RegistryService } from './registry.service';
 
 @Module({
   controllers: [RegistryController],
-  providers: [RegistryService]
+  providers: [RegistryService],
 })
 export class RegistryModule {}
