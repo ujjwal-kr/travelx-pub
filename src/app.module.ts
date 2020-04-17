@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { BookingsModule } from './bookings/bookings.module';
 import { RegistryModule } from './registry/registry.module';
 import { CategoryModule } from './category/category.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { CategoryModule } from './category/category.module';
     }),
     RegistryModule,
     CategoryModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
