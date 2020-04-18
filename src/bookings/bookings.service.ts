@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, NotAcceptableException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  NotAcceptableException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Booking } from './bookings.model';
@@ -20,7 +24,7 @@ export class BookingsService {
       const bookingData = await this.bookingModel.create(data);
       return bookingData;
     } catch (e) {
-      return new NotAcceptableException()
+      return new NotAcceptableException();
     }
   }
 
@@ -43,7 +47,7 @@ export class BookingsService {
   }
 
   async delete(id) {
-    try{
+    try {
       return await this.bookingModel.findByIdAndDelete(id);
     } catch {
       return new NotFoundException();

@@ -23,6 +23,6 @@ export class BookingsController {
 
   @Delete(':id')
   async deleteOne(@Param() id: any) {
-    return this.bookingsService.delete(id.id)
+    return this.bookingsService.delete(id.id);
   }
 }
