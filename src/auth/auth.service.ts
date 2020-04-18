@@ -11,6 +11,7 @@ export class AuthService {
 
   private sanitize(user: User) {
     user.password = null;
+    if (user.role == 'admin') user.role = 'theadmin';
     return user;
   }
 

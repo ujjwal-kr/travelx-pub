@@ -5,6 +5,7 @@ export const UserSchema = new mongoose.Schema({
   name: String,
   password: String,
   email: String,
+  role: { type: String, default: 'user' },
 });
 
 UserSchema.pre('save', async function(next: mongoose.HookNextFunction) {
@@ -24,4 +25,5 @@ export interface User extends mongoose.Document {
   name?: string;
   password?: string;
   email?: string;
+  role?: string;
 }

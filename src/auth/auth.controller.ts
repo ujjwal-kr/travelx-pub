@@ -6,25 +6,28 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private userService: AuthService, private jwtService: JwtService) {}
+  constructor(
+    private userService: AuthService,
+    private jwtService: JwtService,
+  ) {}
 
   @Post('login')
   async login(@Body() userDto: LoginDto) {
     const user = await this.userService.findByLogin(userDto);
     const payload = {
-      email: user.email
-    }
+      email: user.email,
+      role: user.role,
+    };
 
     const token = await this.jwtService.signPayload(payload);
-    return { user, token }
+    return { user, token };
   }
 
   @Get('secret')
   @UseGuards(AuthGuard('jwt'))
   tempAuth() {
-    return {auth: 'works'}
+    return { auth: 'works' };
   }
-
 
   @Post('register')
   async register(@Body() userDto: RegisterDto) {
