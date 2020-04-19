@@ -3,11 +3,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Booking } from './bookings.model';
 import * as mongoose from 'mongoose';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class BookingsService {
   constructor(
     @InjectModel('Booking') private readonly bookingModel: Model<Booking>,
+    private authService: AuthService
   ) {}
 
   private sanitize(booking: Booking): Booking {
@@ -55,6 +57,12 @@ export class BookingsService {
     } catch (e) {
       throw new HttpException('Booking Not Found', HttpStatus.NOT_FOUND);
     }
+  }
+
+  async getUser(id) {
+    const booking: Booking = await this.bookingModel.findById(id);
+    const userId = booking.userId;
+    return await this.authService.getUser(userId);
   }
 
   async delete(id) {

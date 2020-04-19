@@ -18,6 +18,11 @@ export class BookingsController {
     return this.bookingsService.getAll();
   }
 
+  @Get(':id/user')
+  async getUser(@Param() id) {
+    return await this.bookingsService.getUser(id.id);
+  }
+
   @Post()
   async postBooking(@Body() booking: Booking) {
     return await this.bookingsService.insertBooking(booking);
