@@ -1,8 +1,7 @@
-import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './authDto';
 import { JwtService } from './jwt.service';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
@@ -17,16 +16,11 @@ export class AuthController {
     const payload = {
       email: user.email,
       role: user.role,
+      id: user.id
     };
 
     const token = await this.jwtService.signPayload(payload);
     return { user, token };
-  }
-
-  @Get('secret')
-  @UseGuards(AuthGuard('jwt'))
-  tempAuth() {
-    return { auth: 'works' };
   }
 
   @Post('register')

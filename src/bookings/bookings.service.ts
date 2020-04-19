@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  NotAcceptableException,
-} from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Booking } from './bookings.model';
@@ -14,35 +10,50 @@ export class BookingsService {
     @InjectModel('Booking') private readonly bookingModel: Model<Booking>,
   ) {}
 
-  async insertBooking(newBooking) {
+  private sanitize(booking: Booking): Booking {
+    booking.userId = null;
+    return booking;
+  }
+
+  private sanitizeArray(bookings: Booking[]) {
+    bookings.forEach(booking => {
+      booking.userId = null
+    })
+    return bookings
+  }
+
+  async insertBooking(newBooking: Booking) {
     try {
       const data = {
         _id: new mongoose.Types.ObjectId(),
         name: newBooking.name,
         description: newBooking.description,
+        userId: newBooking.userId
       };
       const bookingData = await this.bookingModel.create(data);
-      return bookingData;
+      return this.sanitize(bookingData);
     } catch (e) {
-      return new NotAcceptableException();
+      throw new HttpException('Validation Error', HttpStatus.NOT_ACCEPTABLE);
     }
   }
 
   async getOne(id) {
     try {
       const booking = await this.bookingModel.findById(id);
-      if (booking == null || !booking) return new NotFoundException();
-      return booking;
+      if (booking == null || !booking)
+        throw new HttpException('Booking Not Found', HttpStatus.NOT_FOUND);
+      return this.sanitize(booking);
     } catch {
-      return new NotFoundException();
+      throw new HttpException('Booking Not Found', HttpStatus.NOT_FOUND);
     }
   }
 
   async getAll() {
     try {
-      return await this.bookingModel.find();
+      const bookings = await this.bookingModel.find();
+      return this.sanitizeArray(bookings);
     } catch (e) {
-      return new NotFoundException();
+      throw new HttpException('Booking Not Found', HttpStatus.NOT_FOUND);
     }
   }
 
@@ -50,7 +61,7 @@ export class BookingsService {
     try {
       return await this.bookingModel.findByIdAndDelete(id);
     } catch {
-      return new NotFoundException();
+      throw new HttpException('Booking Not Found', HttpStatus.NOT_FOUND);
     }
   }
 }
