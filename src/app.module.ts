@@ -12,6 +12,7 @@ import { AuthModule } from './auth/auth.module';
     BookingsModule,
     MongooseModule.forRoot('mongodb://localhost:27017/travelx', {
       useNewUrlParser: true,
+      useUnifiedTopology: true,
     }),
     RegistryModule,
     CategoryModule,
