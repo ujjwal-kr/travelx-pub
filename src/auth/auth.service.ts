@@ -40,12 +40,12 @@ export class AuthService {
     try {
       return this.userModel.findById(id);
     } catch {
-      throw new HttpException("User Not Found", HttpStatus.NOT_FOUND)
+      throw new HttpException('User Not Found', HttpStatus.NOT_FOUND);
     }
   }
 
   async findByPayload(payload: any) {
     const { email } = payload;
-    return this.userModel.findOne({ email }); 
+    return this.userModel.findOne({ email });
   }
 }

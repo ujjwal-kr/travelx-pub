@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { BookingsService } from './bookings.service';
 import { Booking } from './bookings.model';
 
@@ -19,8 +12,8 @@ export class BookingsController {
   }
 
   @Get(':id/user')
-  async getUser(@Param() id) {
-    return await this.bookingsService.getUser(id.id);
+  async getUser(@Param() params: any) {
+    return await this.bookingsService.getUser(params.id);
   }
 
   @Post()
@@ -29,12 +22,12 @@ export class BookingsController {
   }
 
   @Get(':id')
-  async findOne(@Param() id: any) {
-    return await this.bookingsService.getOne(id.id);
+  async findOne(@Param() params: any) {
+    return await this.bookingsService.getOne(params.id);
   }
 
   @Delete(':id')
-  async deleteOne(@Param() id: any) {
-    return this.bookingsService.delete(id.id);
+  async deleteOne(@Param() params: any) {
+    return this.bookingsService.delete(params.id);
   }
 }

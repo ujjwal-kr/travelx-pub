@@ -4,7 +4,8 @@ export const BookingsSchema = new mongoose.Schema({
   _id: mongoose.Types.ObjectId,
   name: { type: String, required: true },
   description: String,
-  userId: String
+  userId: String,
+  category: String,
 });
 
 export interface Booking extends mongoose.Document {
@@ -12,4 +13,5 @@ export interface Booking extends mongoose.Document {
   name?: string;
   description?: string;
   userId?: string;
+  category?: string;
 }

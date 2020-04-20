@@ -16,7 +16,7 @@ export class AuthController {
     const payload = {
       email: user.email,
       role: user.role,
-      id: user.id
+      id: user.id,
     };
 
     const token = await this.jwtService.signPayload(payload);

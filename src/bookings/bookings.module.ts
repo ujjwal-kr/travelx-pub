@@ -8,13 +8,13 @@ import { BookingsController } from './bookings.controller';
 import { BookingsService } from './bookings.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { BookingsSchema } from './bookings.model';
-import { AdminMiddleware } from './admin.middleware';
+import { AdminMiddleware } from '../middlewares/admin.middleware';
 import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Booking', schema: BookingsSchema }]),
-    AuthModule
+    AuthModule,
   ],
   controllers: [BookingsController],
   providers: [BookingsService],

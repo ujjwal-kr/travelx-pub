@@ -15,7 +15,7 @@ export class AdminMiddleware implements NestMiddleware {
     try {
       const token = req.headers.authorization.split(' ');
       const decoded: any = jwt.verify(token[1], KEY);
-      req.body.userId = decoded.id
+      req.body.userId = decoded.id;
       if (decoded.role == 'admin') return next();
       throw new HttpException('Not Authorized', HttpStatus.UNAUTHORIZED);
     } catch (e) {
@@ -23,4 +23,3 @@ export class AdminMiddleware implements NestMiddleware {
     }
   }
 }
- 

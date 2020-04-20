@@ -9,7 +9,7 @@ import { AuthService } from 'src/auth/auth.service';
 export class BookingsService {
   constructor(
     @InjectModel('Booking') private readonly bookingModel: Model<Booking>,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   private sanitize(booking: Booking): Booking {
@@ -19,9 +19,9 @@ export class BookingsService {
 
   private sanitizeArray(bookings: Booking[]) {
     bookings.forEach(booking => {
-      booking.userId = null
-    })
-    return bookings
+      booking.userId = null;
+    });
+    return bookings;
   }
 
   async insertBooking(newBooking: Booking) {
@@ -30,7 +30,7 @@ export class BookingsService {
         _id: new mongoose.Types.ObjectId(),
         name: newBooking.name,
         description: newBooking.description,
-        userId: newBooking.userId
+        userId: newBooking.userId,
       };
       const bookingData = await this.bookingModel.create(data);
       return this.sanitize(bookingData);
