@@ -16,7 +16,7 @@ import { BookingsModule } from 'src/bookings/bookings.module';
   controllers: [CategoryController],
   imports: [
     MongooseModule.forFeature([{ name: 'Categories', schema: CategorySchema }]),
-    BookingsModule
+    BookingsModule,
   ],
 })
 export class CategoryModule implements NestModule {

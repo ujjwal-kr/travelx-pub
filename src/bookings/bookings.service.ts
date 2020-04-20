@@ -66,7 +66,7 @@ export class BookingsService {
   }
 
   async getByCategory(name: any) {
-    return this.bookingModel.find({category: name})
+    return this.bookingModel.find({ category: name });
   }
 
   async delete(id) {

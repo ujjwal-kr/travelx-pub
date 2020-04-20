@@ -18,7 +18,7 @@ import { AuthModule } from 'src/auth/auth.module';
   ],
   controllers: [BookingsController],
   providers: [BookingsService],
-  exports: [BookingsService]
+  exports: [BookingsService],
 })
 export class BookingsModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
