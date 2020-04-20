@@ -5,7 +5,7 @@ export const BookingsSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: String,
   userId: String,
-  category: String,
+  // category: String,
 });
 
 export interface Booking extends mongoose.Document {
@@ -13,5 +13,5 @@ export interface Booking extends mongoose.Document {
   name?: string;
   description?: string;
   userId?: string;
-  category?: string;
+  // category?: string;
 }
