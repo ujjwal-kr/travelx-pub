@@ -17,7 +17,11 @@ export class CategoryService {
   }
 
   async findOne(name: string) {
-    return await this.categoryModel.findOne({ name });
+    try{
+      return await this.categoryModel.findOne({ name });
+    } catch {
+      throw new HttpException("Category Dosen't Exist", HttpStatus.NOT_FOUND);
+    }
   }
 
   async getBookings(id) {
