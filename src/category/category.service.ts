@@ -17,7 +17,7 @@ export class CategoryService {
   }
 
   async findOne(name: string) {
-    try{
+    try {
       return await this.categoryModel.findOne({ name });
     } catch {
       throw new HttpException("Category Dosen't Exist", HttpStatus.NOT_FOUND);

@@ -7,22 +7,22 @@ export class CategoryController {
   constructor(private categoryService: CategoryService) {}
 
   @Get()
-  getAll() {
-    return this.categoryService.getAll();
+  async getAll() {
+    return await this.categoryService.getAll();
   }
 
   @Get(':id')
-  findOne(@Param() params: any) {
-    return this.categoryService.findOne(params.name);
+  async findOne(@Param() params: any) {
+    return await this.categoryService.findOne(params.name);
   }
 
   @Post()
-  postCategory(@Body() categoryData: Category) {
-    return this.categoryService.post(categoryData);
+  async postCategory(@Body() categoryData: Category) {
+    return await this.categoryService.post(categoryData);
   }
 
   @Get(':id/bookings')
-  getBookings(@Param() params: any) {
-    return this.categoryService.getBookings(params.id);
+  async getBookings(@Param() params: any) {
+    return await this.categoryService.getBookings(params.id);
   }
 }
