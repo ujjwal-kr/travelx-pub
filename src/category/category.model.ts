@@ -6,6 +6,6 @@ export const CategorySchema = new mongoose.Schema({
 });
 
 export interface Category extends mongoose.Document {
-  _id: string;
-  name?: string;
+  _id: mongoose.Types.ObjectId;
+  name?: any;
 }

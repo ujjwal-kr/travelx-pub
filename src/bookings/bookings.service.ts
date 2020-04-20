@@ -65,6 +65,10 @@ export class BookingsService {
     return await this.authService.getUser(userId);
   }
 
+  async getByCategory(name: any) {
+    return this.bookingModel.find({category: name})
+  }
+
   async delete(id) {
     try {
       return await this.bookingModel.findByIdAndDelete(id);

@@ -9,12 +9,14 @@ import { CategoryController } from './category.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CategorySchema } from './category.model';
 import { AdminMiddleware } from 'src/middlewares/admin.middleware';
+import { BookingsModule } from 'src/bookings/bookings.module';
 
 @Module({
   providers: [CategoryService],
   controllers: [CategoryController],
   imports: [
     MongooseModule.forFeature([{ name: 'Categories', schema: CategorySchema }]),
+    BookingsModule
   ],
 })
 export class CategoryModule implements NestModule {
