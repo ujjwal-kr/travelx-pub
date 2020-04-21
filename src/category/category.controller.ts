@@ -25,4 +25,9 @@ export class CategoryController {
   async getBookings(@Param() params: any) {
     return await this.categoryService.getBookings(params.id);
   }
+
+  @Get(':id')
+  async delete(@Param() params: any) {
+    return await this.categoryService.delete(params.id);
+  }
 }

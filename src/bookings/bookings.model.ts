@@ -9,7 +9,7 @@ export const BookingsSchema = new mongoose.Schema({
 });
 
 export interface Booking extends mongoose.Document {
-  _id: string;
+  _id: mongoose.Types.ObjectId;
   name?: string;
   description?: string;
   userId?: string;

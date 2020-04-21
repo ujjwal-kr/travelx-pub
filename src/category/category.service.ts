@@ -38,15 +38,24 @@ export class CategoryService {
   async post(categoryData: Category) {
     try {
       const RAWname = categoryData.name;
-      const name = RAWname.toLowerCase;
+      const name = await RAWname.toLowerCase();
       const category = {
         name: name,
-        id: new mongoose.Types.ObjectId(),
+        _id: new mongoose.Types.ObjectId(),
       };
       const newCategory = await this.categoryModel.create(category);
       return newCategory;
     } catch (e) {
+      console.log(e)
       throw new HttpException('Validation Error', HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async delete(id) {
+    try {
+      this.categoryModel.findByIdAndDelete(id);
+    } catch {
+      throw new HttpException('Category not found', HttpStatus.NOT_FOUND);
     }
   }
 }
