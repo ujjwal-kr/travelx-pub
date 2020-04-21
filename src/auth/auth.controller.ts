@@ -14,7 +14,6 @@ export class AuthController {
   async login(@Body() userDto: LoginDto) {
     const user = await this.userService.findByLogin(userDto);
     const payload = {
-      email: user.email,
       role: user.role,
       id: user.id,
     };
