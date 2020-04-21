@@ -11,7 +11,7 @@ export class CategoryController {
     return await this.categoryService.getAll();
   }
 
-  @Get(':id')
+  @Get(':name')
   async findOne(@Param() params: any) {
     return await this.categoryService.findOne(params.name);
   }
@@ -21,9 +21,9 @@ export class CategoryController {
     return await this.categoryService.post(categoryData);
   }
 
-  @Get(':id/bookings')
+  @Get(':name/bookings')
   async getBookings(@Param() params: any) {
-    return await this.categoryService.getBookings(params.id);
+    return await this.categoryService.getBookings(params.name);
   }
 
   @Get(':id')

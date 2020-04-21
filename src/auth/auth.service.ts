@@ -44,6 +44,10 @@ export class AuthService {
     }
   }
 
+  async getAll() {
+    return await this.userModel.find();
+  }
+
   async findByPayload(payload: any) {
     const { email } = payload;
     return this.userModel.findOne({ email });

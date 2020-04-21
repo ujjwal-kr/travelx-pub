@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './authDto';
 import { JwtService } from './jwt.service';
@@ -21,6 +21,11 @@ export class AuthController {
 
     const token = await this.jwtService.signPayload(payload);
     return { user, token };
+  }
+
+  @Get('users')
+  async getAll() {
+    return await this.userService.getAll();
   }
 
   @Post('register')

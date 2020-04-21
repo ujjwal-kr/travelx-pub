@@ -22,8 +22,8 @@ export class RegistryController {
   }
 
   @Get(':id')
-  async getOne(@Param() params: any) {
-    return await this.registryService.getOne(params.id, params.userId);
+  async getOne(@Param() params: any, @Body() body) {
+    return await this.registryService.getOne(params.id, body.userId, body.isAdmin);
   }
 
   @Post()

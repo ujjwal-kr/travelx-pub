@@ -14,12 +14,14 @@ export class RegistryService {
     return this.registryModel.find();
   }
 
-  async getOne(id, userId) {
+  async getOne(id, userId, isAdmin) {
     try {
       const registry = await this.registryModel.findById(id);
+      if (isAdmin == true) return registry;
       if (registry.userId == userId) return registry;
       throw new HttpException("Not Authorized", HttpStatus.UNAUTHORIZED);
-    } catch {
+    } catch (e) {
+      console.log(e)
       throw new HttpException(
         'Booking Does Not Exist On Registry',
         HttpStatus.NOT_FOUND,
@@ -30,7 +32,7 @@ export class RegistryService {
   async post(registryData: Registry) {
     try {
       const data: any = {
-        id: new mongoose.Types.ObjectId(),
+        _id: new mongoose.Types.ObjectId(),
         userId: registryData.userId,
         category: registryData.category,
         bookingId: registryData.bookingId,

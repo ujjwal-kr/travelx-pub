@@ -31,6 +31,7 @@ export class BookingsService {
         name: newBooking.name,
         description: newBooking.description,
         userId: newBooking.userId,
+        category: newBooking.category
       };
       const bookingData = await this.bookingModel.create(data);
       return this.sanitize(bookingData);

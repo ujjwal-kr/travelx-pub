@@ -26,6 +26,7 @@ export class RegistryModule implements NestModule {
       .exclude(
         { path: 'registry', method: RequestMethod.POST },
         { path: 'registry/:id/verified', method: RequestMethod.PATCH },
+        { path: 'registry/:id', method: RequestMethod.GET }
       )
       .forRoutes(RegistryController);
 

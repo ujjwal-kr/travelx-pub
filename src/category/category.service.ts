@@ -24,8 +24,8 @@ export class CategoryService {
     }
   }
 
-  async getBookings(id) {
-    const category: Category = await this.categoryModel.findById(id);
+  async getBookings(name) {
+    const category: Category = await this.categoryModel.findOne({name});
     if (!category)
       throw new HttpException("Category Dosen't Exist", HttpStatus.NOT_FOUND);
     try {

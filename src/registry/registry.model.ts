@@ -9,7 +9,7 @@ export const RegistrySchema = new mongoose.Schema({
 });
 
 export interface Registry extends mongoose.Document {
-  id: mongoose.Types.ObjectId;
+  _id: mongoose.Types.ObjectId;
   userId?: string;
   claimedUser?: string;
   category?: string;
