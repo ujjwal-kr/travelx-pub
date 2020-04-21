@@ -21,13 +21,13 @@ export class RegistryController {
     return await this.registryService.getAll();
   }
 
-  @Get()
+  @Get(':id')
   async getOne(@Param() params: any) {
-    return await this.registryService.getOne(params.id);
+    return await this.registryService.getOne(params.id, params.userId);
   }
 
   @Post()
-  @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard('jwt'))
   async postRegistry(@Body() registry: Registry) {
     return await this.registryService.post(registry);
   }

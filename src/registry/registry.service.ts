@@ -14,9 +14,11 @@ export class RegistryService {
     return this.registryModel.find();
   }
 
-  async getOne(id) {
+  async getOne(id, userId) {
     try {
-      return this.registryModel.findById(id);
+      const registry = await this.registryModel.findById(id);
+      if (registry.userId == userId) return registry;
+      throw new HttpException("Not Authorized", HttpStatus.UNAUTHORIZED);
     } catch {
       throw new HttpException(
         'Booking Does Not Exist On Registry',

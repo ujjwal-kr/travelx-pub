@@ -9,6 +9,7 @@ import { RegistryService } from './registry.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { RegistrySchema } from './registry.model';
 import { AdminMiddleware } from 'src/middlewares/admin.middleware';
+import { UserMiddleware } from 'src/middlewares/user.middleware';
 import { RoleGuardMiddleware } from './role-guard.middleware';
 
 @Module({
@@ -25,9 +26,21 @@ export class RegistryModule implements NestModule {
       .exclude(
         { path: 'registry', method: RequestMethod.POST },
         { path: 'registry/:id/verified', method: RequestMethod.PATCH },
-      ).forRoutes(RegistryController)
+      )
+      .forRoutes(RegistryController);
 
-    consumer.apply(RoleGuardMiddleware)
-    .forRoutes({path: 'registry/:id/verified', method: RequestMethod.PATCH})
+    consumer
+      .apply(RoleGuardMiddleware)
+      .forRoutes({
+        path: 'registry/:id/verified',
+        method: RequestMethod.PATCH,
+      });
+
+    consumer
+      .apply(UserMiddleware)
+      .forRoutes(
+        { path: 'registry', method: RequestMethod.POST },
+        { path: 'registry/:id', method: RequestMethod.GET },
+      );
   }
 }
