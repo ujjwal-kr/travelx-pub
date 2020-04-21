@@ -55,12 +55,10 @@ export class RegistryService {
     }
   }
 
-  async toggleBooked(id, body) {
+  async booked(id) {
     try {
       const registry: Registry = await this.registryModel.findById(id);
-      if (registry.userId != body.claimedUser)
-        throw new HttpException('Not Authorized', HttpStatus.UNAUTHORIZED);
-      registry.booked = !registry.booked;
+      registry.booked = true;
       await registry.save();
     } catch {
       throw new HttpException(
@@ -70,9 +68,11 @@ export class RegistryService {
     }
   }
 
-  async verifyBooking(id) {
+  async verifyBooking(id, body) {
     try {
       const registry: Registry = await this.registryModel.findById(id);
+      if (registry.userId != body.claimedUser)
+        throw new HttpException('Not Authorized', HttpStatus.UNAUTHORIZED);
       registry.verified = true;
       await registry.save();
     } catch {

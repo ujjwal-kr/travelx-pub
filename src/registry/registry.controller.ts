@@ -38,12 +38,12 @@ export class RegistryController {
   }
 
   @Patch(':id/booked')
-  async toggleBooked(@Param() params, @Body() body: any) {
-    return await this.registryService.toggleBooked(params.id, body);
+  async toggleBooked(@Param() params) {
+    return await this.registryService.booked(params.id);
   }
 
   @Patch(':id/verified')
-  async verifyBooking(@Param() params) {
-    return await this.registryService.verifyBooking(params.id);
+  async verifyBooking(@Param() params, @Body() body) {
+    return await this.registryService.verifyBooking(params.id, body);
   }
 }

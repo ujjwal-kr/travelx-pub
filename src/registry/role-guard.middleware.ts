@@ -14,7 +14,7 @@ export class RoleGuardMiddleware implements NestMiddleware {
     try {
       const token = req.headers.authorization.split(' ');
       const decoded: any = jwt.verify(token[1], KEY);
-      const userId = decoded.userId;
+      const userId = decoded.id;
       req.body.claimedUser = userId;
       return next();
     } catch {
