@@ -25,7 +25,8 @@ export class CategoryModule implements NestModule {
       .apply(AdminMiddleware)
       .exclude(
         { path: 'categories', method: RequestMethod.GET },
-        { path: 'categories/:id', method: RequestMethod.GET },
+        { path: 'categories/:name', method: RequestMethod.GET },
+        { path: 'categories/:name', method: RequestMethod.GET }
       )
       .forRoutes(CategoryController);
   }
