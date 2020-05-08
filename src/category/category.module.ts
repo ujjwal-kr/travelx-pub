@@ -26,7 +26,7 @@ export class CategoryModule implements NestModule {
       .exclude(
         { path: 'categories', method: RequestMethod.GET },
         { path: 'categories/:name', method: RequestMethod.GET },
-        { path: 'categories/:name/bookings', method: RequestMethod.GET }
+        { path: 'categories/:name/bookings', method: RequestMethod.GET },
       )
       .forRoutes(CategoryController);
   }

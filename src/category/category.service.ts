@@ -25,7 +25,7 @@ export class CategoryService {
   }
 
   async getBookings(name) {
-    const category: Category = await this.categoryModel.findOne({name});
+    const category: Category = await this.categoryModel.findOne({ name });
     if (!category)
       throw new HttpException("Category Dosen't Exist", HttpStatus.NOT_FOUND);
     try {
@@ -46,7 +46,7 @@ export class CategoryService {
       const newCategory = await this.categoryModel.create(category);
       return newCategory;
     } catch (e) {
-      console.log(e)
+      console.log(e);
       throw new HttpException('Validation Error', HttpStatus.BAD_REQUEST);
     }
   }

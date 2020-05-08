@@ -36,7 +36,9 @@ export class AuthService {
     return this.sanitize(newUser);
   }
 
-  async getUser(id) {
+  async getUser(id, userId) {
+    if (userId !== id)
+      throw new HttpException('Not Authorized', HttpStatus.UNAUTHORIZED);
     try {
       return this.userModel.findById(id);
     } catch {

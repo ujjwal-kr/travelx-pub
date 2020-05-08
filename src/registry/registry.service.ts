@@ -19,9 +19,9 @@ export class RegistryService {
       const registry = await this.registryModel.findById(id);
       if (isAdmin == true) return registry;
       if (registry.userId == userId) return registry;
-      throw new HttpException("Not Authorized", HttpStatus.UNAUTHORIZED);
+      throw new HttpException('Not Authorized', HttpStatus.UNAUTHORIZED);
     } catch (e) {
-      console.log(e)
+      console.log(e);
       throw new HttpException(
         'Booking Does Not Exist On Registry',
         HttpStatus.NOT_FOUND,

@@ -5,7 +5,7 @@ export const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
   password: { type: String, unique: true, required: true },
   email: { type: String, unique: true, required: true },
-  role: { type: String, default: 'user' }
+  role: { type: String, default: 'user' },
 });
 
 UserSchema.pre('save', async function(next: mongoose.HookNextFunction) {

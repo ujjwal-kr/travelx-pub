@@ -26,16 +26,14 @@ export class RegistryModule implements NestModule {
       .exclude(
         { path: 'registry', method: RequestMethod.POST },
         { path: 'registry/:id/verified', method: RequestMethod.PATCH },
-        { path: 'registry/:id', method: RequestMethod.GET }
+        { path: 'registry/:id', method: RequestMethod.GET },
       )
       .forRoutes(RegistryController);
 
-    consumer
-      .apply(RoleGuardMiddleware)
-      .forRoutes({
-        path: 'registry/:id/verified',
-        method: RequestMethod.PATCH,
-      });
+    consumer.apply(RoleGuardMiddleware).forRoutes({
+      path: 'registry/:id/verified',
+      method: RequestMethod.PATCH,
+    });
 
     consumer
       .apply(UserMiddleware)

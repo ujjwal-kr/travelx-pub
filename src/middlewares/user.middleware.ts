@@ -16,7 +16,7 @@ export class UserMiddleware implements NestMiddleware {
       const decoded: any = jwt.verify(token[1], KEY);
       req.body.userId = decoded.id;
       let isAdmin = true;
-      if (decoded.role != 'admin') isAdmin = false
+      if (decoded.role != 'admin') isAdmin = false;
       req.body.isAdmin = isAdmin;
       return next();
     } catch (e) {

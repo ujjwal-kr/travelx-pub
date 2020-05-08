@@ -23,7 +23,11 @@ export class RegistryController {
 
   @Get(':id')
   async getOne(@Param() params: any, @Body() body) {
-    return await this.registryService.getOne(params.id, body.userId, body.isAdmin);
+    return await this.registryService.getOne(
+      params.id,
+      body.userId,
+      body.isAdmin,
+    );
   }
 
   @Post()
