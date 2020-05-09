@@ -29,6 +29,20 @@ export class RegistryService {
     }
   }
 
+  async getByUser(userId, body) {
+    try{
+      const registries = this.registryModel.find({ userId });
+      if (body.isAdmin == true) return registries;
+      if (body.userId == userId) return registries;
+      throw new HttpException("Not Authorized", HttpStatus.UNAUTHORIZED);
+    } catch {
+      throw new HttpException(
+        'No registry data By user',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+  }
+
   async post(registryData: Registry) {
     try {
       const data: any = {
@@ -54,6 +68,7 @@ export class RegistryService {
       );
     }
   }
+
 
   async booked(id) {
     try {

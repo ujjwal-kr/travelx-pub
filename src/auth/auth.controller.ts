@@ -21,10 +21,10 @@ export class AuthController {
     const token = await this.jwtService.signPayload(payload);
     return { user, token };
   }
-
+ 
   @Get('users/:id')
   async getUser(@Param() params: any, @Body() body: any) {
-    return this.userService.getUser(params.id, body.userId);
+    return this.userService.getUser(params.id, body);
   }
 
   @Get('users')

@@ -40,6 +40,7 @@ export class RegistryModule implements NestModule {
       .forRoutes(
         { path: 'registry', method: RequestMethod.POST },
         { path: 'registry/:id', method: RequestMethod.GET },
+        { path: 'registry/user/:id', method: RequestMethod.GET }
       );
   }
 }

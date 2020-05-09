@@ -63,7 +63,7 @@ export class BookingsService {
   async getUser(id) {
     const booking: Booking = await this.bookingModel.findById(id);
     const userId = booking.userId;
-    return await this.authService.getUser(userId);
+    return await this.authService.getUser(userId, userId);
   }
 
   async getByCategory(name: any) {

@@ -6,11 +6,9 @@ import {
   Body,
   Delete,
   Patch,
-  UseGuards,
 } from '@nestjs/common';
 import { RegistryService } from './registry.service';
 import { Registry } from './registry.model';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('registry')
 export class RegistryController {
@@ -30,8 +28,12 @@ export class RegistryController {
     );
   }
 
+  @Get('user/:id')
+  async getByUser(@Param() params: any, @Body() body: any) {
+    return await this.registryService.getByUser(params.id, body);
+  }
+
   @Post()
-  @UseGuards(AuthGuard('jwt'))
   async postRegistry(@Body() registry: Registry) {
     return await this.registryService.post(registry);
   }
