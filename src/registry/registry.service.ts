@@ -31,7 +31,7 @@ export class RegistryService {
 
   async getByUser(userId, body) {
     try{
-      const registries = this.registryModel.find({ userId });
+      const registries = await this.registryModel.find({ userId });
       if (body.isAdmin == true) return registries;
       if (body.userId == userId) return registries;
       throw new HttpException("Not Authorized", HttpStatus.UNAUTHORIZED);

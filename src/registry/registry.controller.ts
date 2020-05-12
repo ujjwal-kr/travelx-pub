@@ -29,7 +29,7 @@ export class RegistryController {
   }
 
   @Get('user/:id')
-  async getByUser(@Param() params: any, @Body() body: any) {
+  async getByUser(@Param() params: any, @Body() body) {
     return await this.registryService.getByUser(params.id, body);
   }
 
