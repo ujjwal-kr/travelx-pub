@@ -19,6 +19,21 @@ export class RegistryController {
     return await this.registryService.getAll();
   }
 
+  @Get('verified')
+  async getVerified() {
+    return this.registryService.getVerified();
+  }
+
+  @Get('pending')
+  async getPending() {
+    return this.registryService.getPeding()
+  }
+
+  @Get('booked')
+  async getBooked() {
+    return this.registryService.getBooked();
+  }
+
   @Get(':id')
   async getOne(@Param() params: any, @Body() body) {
     return await this.registryService.getOne(

@@ -14,6 +14,40 @@ export class RegistryService {
     return this.registryModel.find();
   }
 
+  async getVerified() {
+    try{
+      const registries = await this.registryModel.find({
+        verified: true
+      });
+      return registries;
+    } catch {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+  }
+
+  async getBooked() {
+    try{
+      const registries = await this.registryModel.find({
+        booked: true
+      });
+      return registries;
+    } catch {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+  }
+
+  async getPeding() {
+    try{
+      const registries = await this.registryModel.find({
+        booked: false,
+        verified: false
+      });
+      return registries;
+    } catch {
+      throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
+    }
+  }
+
   async getOne(id, userId, isAdmin) {
     try {
       const registry = await this.registryModel.findById(id);
