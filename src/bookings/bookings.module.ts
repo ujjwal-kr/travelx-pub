@@ -10,6 +10,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { BookingsSchema } from './bookings.model';
 import { AdminMiddleware } from '../middlewares/admin.middleware';
 import { AuthModule } from 'src/auth/auth.module';
+import { UserMiddleware } from 'src/middlewares/user.middleware';
 
 @Module({
   imports: [
@@ -29,5 +30,9 @@ export class BookingsModule implements NestModule {
         { path: 'bookings/:id', method: RequestMethod.GET },
       )
       .forRoutes(BookingsController);
+
+      consumer.apply(UserMiddleware)
+      .forRoutes({path: 'bookings', method: RequestMethod.POST})
   }
+
 }
