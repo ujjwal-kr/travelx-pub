@@ -9,7 +9,7 @@ import { AuthService } from 'src/auth/auth.service';
 export class BookingsService {
   constructor(
     @InjectModel('Booking') private readonly bookingModel: Model<Booking>,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   private sanitize(booking: Booking): Booking {
@@ -26,15 +26,21 @@ export class BookingsService {
 
   async insertBooking(newBooking: Booking) {
     try {
-      const data = {
-        _id: new mongoose.Types.ObjectId(),
-        name: newBooking.name,
-        description: newBooking.description,
-        userId: newBooking.userId,
-        category: newBooking.category,
-      };
-      const bookingData = await this.bookingModel.create(data);
-      return this.sanitize(bookingData);
+      try{
+        const catNameRAW = newBooking.category;
+        const catName = await catNameRAW.toLowerCase();
+        const data = {
+          _id: new mongoose.Types.ObjectId(),
+          name: newBooking.name,
+          description: newBooking.description,
+          userId: newBooking.userId,
+          category: catName
+        };
+        const bookingData = await this.bookingModel.create(data);
+        return this.sanitize(bookingData);
+      } catch (e) {
+        throw new HttpException('Validation Error', HttpStatus.NOT_ACCEPTABLE);
+      }
     } catch (e) {
       throw new HttpException('Validation Error', HttpStatus.NOT_ACCEPTABLE);
     }

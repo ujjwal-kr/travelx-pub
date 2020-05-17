@@ -16,7 +16,7 @@ export class CategoryService {
     return await this.categoryModel.find();
   }
 
-  async findOne(name: string) {
+  public async findOne(name: string) {
     try {
       return await this.categoryModel.findOne({ name });
     } catch {
