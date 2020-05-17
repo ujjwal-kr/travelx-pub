@@ -92,6 +92,15 @@ export class RegistryService {
     }
   }
 
+  async getByBooking(id) {
+    try{
+      const registries = await this.registryModel.find({ bookingId: id });
+      return registries;
+    } catch {
+      throw new HttpException("Not Found", HttpStatus.NOT_FOUND);
+    }
+  }
+
   async delete(id) {
     try {
       return this.registryModel.findByIdAndDelete(id);

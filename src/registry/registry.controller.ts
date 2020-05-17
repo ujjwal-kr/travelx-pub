@@ -34,6 +34,11 @@ export class RegistryController {
     return this.registryService.getBooked();
   }
 
+  @Get('booking/:id')
+  async getByBooking(@Param() params) {
+    return await this.registryService.getByBooking(params.id);
+  }
+
   @Get(':id')
   async getOne(@Param() params: any, @Body() body) {
     return await this.registryService.getOne(
