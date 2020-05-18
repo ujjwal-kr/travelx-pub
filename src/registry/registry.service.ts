@@ -28,7 +28,8 @@ export class RegistryService {
   async getBooked() {
     try{
       const registries = await this.registryModel.find({
-        booked: true
+        booked: true,
+        verified: false
       });
       return registries;
     } catch {
