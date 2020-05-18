@@ -37,13 +37,13 @@ export class AuthService {
   }
 
   async getUser(id, body) {
-    const userId = body.userId;
-    if (userId !== id)
-      throw new HttpException('Not Authorized', HttpStatus.UNAUTHORIZED);
-    try {
-      return this.userModel.findById(id);
+    try{
+      const user = this.userModel.findById(id);
+      if (body.userId == id) return user;
+      if (body.isAdmin == true) return user;
+      throw new HttpException("Not Authorized", HttpStatus.UNAUTHORIZED)
     } catch {
-      throw new HttpException('User Not Found', HttpStatus.NOT_FOUND);
+      throw new HttpException("Not Authorized", HttpStatus.UNAUTHORIZED)
     }
   }
 
