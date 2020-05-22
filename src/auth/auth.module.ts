@@ -9,12 +9,11 @@ import { AuthController } from './auth.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from './user.model';
 import { JwtService } from './jwt.service';
-import { JwtStrategy } from './jwt.strategy';
 import { AdminMiddleware } from 'src/middlewares/admin.middleware';
 import { UserMiddleware } from 'src/middlewares/user.middleware';
 
 @Module({
-  providers: [AuthService, JwtService, JwtStrategy],
+  providers: [AuthService, JwtService],
   controllers: [AuthController],
   imports: [MongooseModule.forFeature([{ name: 'Users', schema: UserSchema }])],
   exports: [AuthService],
