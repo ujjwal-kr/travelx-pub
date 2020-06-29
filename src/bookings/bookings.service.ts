@@ -18,7 +18,7 @@ export class BookingsService {
   }
 
   private sanitizeArray(bookings: Booking[]) {
-    bookings.forEach(booking => {
+    bookings.map(booking => {
       booking.userId = null;
     });
     return bookings;
